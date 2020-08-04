@@ -13,3 +13,4 @@ feign:
       default:
         connectTimeout: 10000 #设置连接的超时时间
         readTimeout: 20000  #设置读取的超时时间
+

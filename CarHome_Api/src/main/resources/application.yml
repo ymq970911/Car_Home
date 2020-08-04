@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api  #服务名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.94.193.104:8848  #注册中心地址
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000 #设置连接的超时时间
+        readTimeout: 20000  #设置读取的超时时间

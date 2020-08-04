@@ -1,0 +1,9 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: payserver #服务名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.94.193.104:8848  #注册中心地

@@ -12,9 +12,14 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    //校验昵称是否可用
+    /**
+     * 校验昵称是否可用
+     *
+     * @param name
+     * @return
+     */
     @GetMapping("checkname.do")
-    public R check(@RequestParam String name){
+    public R check(@RequestParam String name) {
         return service.checkNickname(name);
     }
 }

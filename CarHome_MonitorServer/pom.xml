@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>MonitorServer</artifactId>
+    <artifactId>CarHome_MonitorServer</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

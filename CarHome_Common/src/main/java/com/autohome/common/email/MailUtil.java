@@ -1,5 +1,6 @@
 package com.autohome.common.email;
 
+
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -15,6 +16,7 @@ import java.util.Properties;
  * @create: 2018-07-15 11:23
  */
 public class MailUtil {
+
     /**
      * 外网邮件发送
      *
@@ -22,7 +24,7 @@ public class MailUtil {
      * @param code 传入的验证码
      */
     public static void sendMail(String to, String code) {
-        String myEmail = "xxx@qq.com";
+        String myEmail = "2546701752@qq.com";
         // Session对象:
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.qq.com"); // 设置主机地址
@@ -65,6 +67,7 @@ public class MailUtil {
             e.printStackTrace();
         }
     }
+
 
     /**
      * 根据传入的参数生成指定长度随机验证码

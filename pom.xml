@@ -9,14 +9,17 @@
         <module>CarHome_Api</module>
         <module>CarHome_Entity</module>
         <module>CarHome_GateWay</module>
-        <module>CarHomen_EvaluateServer</module>
-        <module>CarHomen_Cache</module>
+        <module>CarHome_EvaluateServer</module>
+        <module>CarHome_Cache</module>
         <module>CarHome_MonitorServer</module>
         <module>CarHome_AuthServer</module>
         <module>CarHome_OrderServer</module>
         <module>CarHome_SearchServer</module>
         <module>CarHome_PayServer</module>
         <module>CarHome_ShopServer</module>
+        <module>CarHome_Cache</module>
+        <module>CarHome_EvaluateServer</module>
+        <module>CarHome_Mail</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

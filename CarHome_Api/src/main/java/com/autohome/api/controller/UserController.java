@@ -14,7 +14,12 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    //校验昵称
+    /**
+     * 校验昵称
+     *
+     * @param name
+     * @return
+     */
     @GetMapping("/checknickname/{name}")
     public R check(@PathVariable String name) {
         return service.checkN(name);

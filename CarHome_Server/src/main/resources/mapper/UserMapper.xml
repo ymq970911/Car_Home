@@ -3,7 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.autohome.server.dao.UserDao">
     <select id="selectByNickName" resultType="com.autohome.entity.User">
-          select * from t_user where nickname=#{name} and flag=1 limit 1
+        select *
+        from user
+        where name = #{name}
+          and sex = 1
+        limit 1
     </select>
-
 </mapper>

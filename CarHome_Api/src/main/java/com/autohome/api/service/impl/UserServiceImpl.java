@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -14,7 +13,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public R checkN(String name) {
-
         return restTemplate.getForObject("http://server/server/user/checkname.do?name=" + name, R.class);
     }
 }

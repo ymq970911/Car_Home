@@ -19,4 +19,6 @@ public interface CarLevelService {
     R updateLevel(MainLevel mainLevel);
 
     R getAllLevels();
+
+    R getLevelById(Integer id);
 }

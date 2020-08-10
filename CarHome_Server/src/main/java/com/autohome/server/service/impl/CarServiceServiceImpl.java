@@ -1,32 +1,31 @@
 package com.autohome.server.service.impl;
 
 import com.aliyuncs.utils.StringUtils;
+import com.autohome.common.dto.ServiceFirstLevelDto;
 import com.autohome.common.vo.R;
-import com.autohome.entity.MainLevel;
-import com.autohome.server.dao.CarLevelDao;
-import com.autohome.server.service.CarLevelService;
+import com.autohome.server.dao.CarServiceDao;
+import com.autohome.server.service.CarServiceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @Class: CarLevelServiceImpl
+ * @Class: CarServiceServiceImpl
  * @Description:
  * @Author: Jerry(姜源)
- * @Create: 2020/08/07 15:02
+ * @Create: 2020/08/08 10:11
  */
 @Service
 @Slf4j
-public class CarLevelServiceImpl implements CarLevelService {
+public class CarServiceServiceImpl implements CarServiceService {
 
     @Autowired
-    private CarLevelDao dao;
+    private CarServiceDao dao;
 
     @Override
-    public R addLevel(String levelName) {
-        if (!StringUtils.isEmpty(levelName)) {
-            log.info("插入主分类：" + levelName);
-            if (dao.save(levelName) > 0) {
+    public R addService(String name) {
+        if (!StringUtils.isEmpty(name)) {
+            if (dao.save(name) > 0) {
                 return R.ok();
             }
         }
@@ -34,10 +33,9 @@ public class CarLevelServiceImpl implements CarLevelService {
     }
 
     @Override
-    public R delLevel(Integer id) {
+    public R delService(Integer id) {
         if (null != dao.selectOne(id)) {
             if (dao.delete(id) > 0) {
-                log.info("删除主分类：" + id);
                 return R.ok();
             }
         }
@@ -45,11 +43,9 @@ public class CarLevelServiceImpl implements CarLevelService {
     }
 
     @Override
-    public R updateLevel(MainLevel mainLevel) {
-        Integer id = mainLevel.getLid();
-        if (null != dao.selectOne(id)) {
-            if (dao.update(mainLevel) > 0) {
-                log.info("修改主分类：" + id);
+    public R updateService(ServiceFirstLevelDto dto) {
+        if (null != dao.selectOne(dto.getId())) {
+            if (dao.update(dto) > 0) {
                 return R.ok();
             }
         }
@@ -57,12 +53,12 @@ public class CarLevelServiceImpl implements CarLevelService {
     }
 
     @Override
-    public R getAllLevels() {
+    public R getAllServices() {
         return R.ok(dao.selectAll());
     }
 
     @Override
-    public R getLevelById(Integer id) {
+    public R getServiceById(Integer id) {
         return R.ok(dao.selectOne(id));
     }
 }

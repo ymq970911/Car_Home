@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autohome.server.dao.CarServiceDao">
+    <resultMap id="selectAllMethod" type="com.autohome.common.dto.ServiceFirstLevelDto">
+        <id property="id" column="fid"/>
+        <result property="name" column="fname"/>
+        <collection property="list" ofType="com.autohome.common.dto.ServiceSecondLevelDto">
+            <id property="sid" column="sid"/>
+            <result property="name" column="sname"/>
+        </collection>
+    </resultMap>
+
+    <insert id="save">
+        insert into service_first_level(name) value (#{name,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="delete">
+        delete
+        from service_first_level
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <update id="update">
+        update service_first_level
+        set name=#{name,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectOne" resultType="com.autohome.common.dto.ServiceFirstLevelDto">
+        select id, name
+        from service_first_level
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAll" resultMap="selectAllMethod">
+        select f.id   as fid,
+               f.name as fname,
+               s.sid  as sid,
+               s.name as sname
+        from service_first_level as f
+                     left join service_second_level s on f.id = s.fid
+    </select>
+</mapper>

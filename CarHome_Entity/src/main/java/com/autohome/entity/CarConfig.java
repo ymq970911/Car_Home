@@ -2,8 +2,10 @@ package com.autohome.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
+
 import lombok.Data;
 
 @ApiModel(value = "com-autohome-entity-CarConfig")
@@ -176,6 +178,13 @@ public class CarConfig implements Serializable {
      */
     @ApiModelProperty(value = "多媒体配置")
     private String media_collocation;
+
+    /**
+     * 汽车配置编号 - 外键
+     */
+    @ApiModelProperty(value = "汽车配置编号 - 外键")
+    private Integer cid;
+
 
     private static final long serialVersionUID = 1L;
 }

@@ -2,8 +2,9 @@ package com.autohome.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 @ApiModel(value = "com-autohome-entity-BrandLevel")
 @Data
@@ -25,6 +26,12 @@ public class BrandLevel implements Serializable {
      */
     @ApiModelProperty(value = "分类编号-外键")
     private Integer lid;
+
+    /**
+     * 图片编号-外键
+     */
+    @ApiModelProperty(value = "品牌logo")
+    private Integer img_id;
 
     private static final long serialVersionUID = 1L;
 }

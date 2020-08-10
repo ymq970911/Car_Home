@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autohome.server.dao.MainLevelDao">
+    <select id="getAllMainLevel" resultType="com.autohome.entity.MainLevel">
+        select * from main_level
+    </select>
+    <insert id="addMainLevel" >
+        insert into main_level (name) values (#{name})
+    </insert>
+</mapper>

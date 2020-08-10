@@ -60,4 +60,14 @@ public class CarLevelController {
     public R getAllLevels() {
         return service.getAllLevels();
     }
+
+    /**
+     * 根据编号获取单个分类信息
+     *
+     * @return
+     */
+    @GetMapping("/oneLevel.do")
+    public R getLevelById(Integer id) {
+        return service.getLevelById(id);
+    }
 }

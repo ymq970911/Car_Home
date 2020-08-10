@@ -75,6 +75,13 @@ public class User implements Serializable {
     @ApiModelProperty(value = "会员标记 0非会员 1会员")
     private Integer vip;
 
+    /**
+     * 图片编号-外键
+     */
+    @ApiModelProperty(value = "头像")
+    private Integer img_id;
+
+
     private static final long serialVersionUID = 1L;
 }
 

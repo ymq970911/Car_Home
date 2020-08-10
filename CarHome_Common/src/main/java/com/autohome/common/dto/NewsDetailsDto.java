@@ -3,10 +3,11 @@ package com.autohome.common.dto;
 import lombok.Data;
 
 @Data
-public class EmailDto {
+public class NewsDetailsDto {
     private String title;
 
-    private String content;
+    private String author;
 
-    private String recemail;
+    private String content;
 }
+

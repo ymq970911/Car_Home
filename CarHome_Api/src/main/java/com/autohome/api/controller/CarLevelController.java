@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @Author: Jerry(姜源)
  * @Create: 2020/08/07 14:59
  */
-@Api(tags = "首页汽车主分类接口")
+@Api(tags = "汽车主分类接口")
 @RestController
 @RequestMapping("/api/carlevel")
 public class CarLevelController {
@@ -52,7 +52,7 @@ public class CarLevelController {
      * @return
      */
     @ApiOperation(value = "修改1个分类", notes = "修改1个分类，需要传入分类编号和分类名称")
-    @PostMapping(value = "/upd")
+    @PostMapping("/upd")
     public R updateLevel(@RequestBody MainLevel mainLevel) {
         return service.updateLevel(mainLevel);
     }
@@ -66,5 +66,16 @@ public class CarLevelController {
     @GetMapping("/all")
     public R getAllLevels() {
         return service.getAllLevels();
+    }
+
+    /**
+     * 根据编号获取单个分类名称
+     *
+     * @return
+     */
+    @ApiOperation(value = "根据编号获取分类", notes = "如果有需要，根据编号获取单个分类信息")
+    @GetMapping("/getLevelById")
+    public R getLevelById(Integer id) {
+        return service.getLevelById(id);
     }
 }

@@ -22,7 +22,7 @@ public class CROSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Origin", "*"); //允许跨域
         response.setHeader("Access-Control-Allow-Credentials", "true"); //允许跨域
         response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");//支持跨域的请求方式
-        response.setHeader("Access-Control-Allow-Headers", "content-type,votertoken");// 允许跨域的请求消息头
+        response.setHeader("Access-Control-Allow-Headers", "content-type");// 允许跨域的请求消息头
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("content-type", "application/json;charset=UTF-8");
         filterChain.doFilter(servletRequest, response);

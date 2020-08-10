@@ -49,6 +49,13 @@ public class NewsDetails implements Serializable {
     @ApiModelProperty(value = "评论编号 - 外键")
     private Integer comment_id;
 
+    /**
+     * 图片编号-外键
+     */
+    @ApiModelProperty(value = "新闻图片")
+    private Integer img_id;
+
+
     private static final long serialVersionUID = 1L;
 }
 

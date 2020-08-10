@@ -62,6 +62,13 @@ public class UsedCarGeneral implements Serializable {
     @ApiModelProperty(value = "原厂保质（年.月）")
     private String rma_time;
 
+    /**
+     * 图片编号-外键
+     */
+    @ApiModelProperty(value = "汽车图片")
+    private Integer img_id;
+
+
     private static final long serialVersionUID = 1L;
 }
 

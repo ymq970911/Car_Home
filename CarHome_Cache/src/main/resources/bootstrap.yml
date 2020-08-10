@@ -1,0 +1,15 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: cacheserver
+  cloud:
+    nacos:
+      discovery: #使用Nacos作为服务的注册中心
+        server-addr: 47.94.193.104:8848  #注册中心地址
+      config:  #配置中心
+        server-addr: 47.94.193.104:8848   #配置中心的地址
+#    sentinel:  #实现服务容错配置
+#      transport:
+#        port: 8719
+#        dashboard: 47.94.193.104:8011

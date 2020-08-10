@@ -32,6 +32,13 @@ public class Garage implements Serializable {
     @ApiModelProperty(value = "汽车款式")
     private String style;
 
+    /**
+     * 图片编号-外键
+     */
+    @ApiModelProperty(value = "车库图片")
+    private Integer img_id;
+
+
     private static final long serialVersionUID = 1L;
 }
 

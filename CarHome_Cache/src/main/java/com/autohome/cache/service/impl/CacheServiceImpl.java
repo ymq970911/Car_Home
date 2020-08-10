@@ -11,9 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -222,7 +220,7 @@ public class CacheServiceImpl implements CacheService {
 
     @Override
     public String getStrFromRedis(String key) {
-        return template.getStringSerializer().toString();
+        return template.opsForValue().get(key, 0, -1);
     }
 
     @Override
@@ -232,7 +230,7 @@ public class CacheServiceImpl implements CacheService {
 
     @Override
     public List<Object> getListFromRedis(String key) {
-        return template.opsForList().range(key, 0, template.opsForList().size(key) - 1);
+        return template.opsForList().range(key, 0, -1);
     }
 
     @Override
@@ -252,47 +250,71 @@ public class CacheServiceImpl implements CacheService {
 
     @Override
     public Map<String, Double> getScoreSetFromRedis(String key) {
-        return null;
+        Map<String, Double> map = new HashMap<>();
+        Set<Object> objects = template.opsForZSet().range(key, 0, -1);
+        if (objects != null) {
+            for (Object o : objects) {
+                map.put((String) o, template.opsForZSet().score(key, o));
+            }
+        }
+        return map;
     }
 
     @Override
     public String getHashFromRedis(String key, String field) {
-        return null;
+        return (String) template.opsForHash().entries(key).get(field);
     }
 
     @Override
     public boolean checkHash(String key, String field) {
-        return false;
+        return template.opsForHash().hasKey(key, field);
     }
 
     @Override
     public Map<String, Object> gethashFromRedis(String key) {
-        return null;
+        Map<String, Object> map = new HashMap<>();
+        template.opsForHash().entries(key).forEach((k, v) -> {
+            if (k instanceof String) {
+                map.put((String) k, v);
+            }
+        });
+        return map;
     }
 
     @Override
     public Map<String, String> gethashStrFromRedis(String key) {
-        return null;
+        Map<String, String> map = new HashMap<>();
+        template.opsForHash().entries(key).forEach((k, v) -> {
+            if (k instanceof String && v instanceof String) {
+                map.put((String) k, (String) v);
+            }
+        });
+        return map;
     }
 
     @Override
     public boolean checkKey(String key) {
-        return false;
+        return template.hasKey(key);
     }
 
     @Override
     public List<String> keys(String prefile) {
-        return null;
+        Set<String> keys = template.keys(prefile + "*");
+        List<String> list = null;
+        if (keys != null) {
+            list = new ArrayList<>(keys);
+        }
+        return list;
     }
 
     @Override
     public boolean expire(String key, long time, TimeUnit timeUnit) {
-        return false;
+        return template.expire(key, time, timeUnit);
     }
 
     @Override
     public boolean delKey(String... keys) {
-        return false;
+        return template.delete(Arrays.asList(keys)) == keys.length;
     }
 
     @Override

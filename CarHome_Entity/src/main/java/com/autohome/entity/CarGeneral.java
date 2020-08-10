@@ -66,10 +66,17 @@ public class CarGeneral implements Serializable {
     private String displacement;
 
     /**
-     * 汽车配置编号 - 外键
+     * 图片编号-外键
      */
-    @ApiModelProperty(value = "汽车配置编号 - 外键")
-    private Integer ccid;
+    @ApiModelProperty(value = "汽车图片")
+    private Integer img_id;
+
+    /**
+     * 关注度
+     */
+    @ApiModelProperty(value = "关注度")
+    private Integer attention;
+
 
     @ApiModelProperty(value = "汽车类型 - 在售/未售")
     private Integer type;

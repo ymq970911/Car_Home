@@ -38,14 +38,20 @@ public class CarLevelServiceImpl implements CarLevelService {
     public R updateLevel(MainLevel mainLevel) {
         log.info(mainLevel.toString());
 
-//        HttpHeaders requestHeaders = new HttpHeaders();
-//        requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-//        HttpEntity<MainLevel> requestEntity = new HttpEntity<MainLevel>(mainLevel, requestHeaders);
-        return restTemplate.postForObject("http://server/server/carlevel/update.do", mainLevel, R.class);
+        // 解决415问题，配置消费者发送到提供者的HTTP消息头为 JSON，告诉服务提供者以 JSON 格式解析数据
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<MainLevel> requestEntity = new HttpEntity<>(mainLevel, requestHeaders);
+        return restTemplate.postForObject("http://server/server/carlevel/update.do", requestEntity, R.class);
     }
 
     @Override
     public R getAllLevels() {
         return restTemplate.getForObject("http://server/server/carlevel/allLevels.do", R.class);
+    }
+
+    @Override
+    public R getLevelById(Integer id) {
+        return restTemplate.getForObject("http://server/server/carlevel/oneLevel.do?id=" + id, R.class);
     }
 }

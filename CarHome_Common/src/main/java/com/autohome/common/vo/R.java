@@ -19,7 +19,7 @@ public class R<T> {
     private T data;
 
     public static R ok() {
-        return new R(200, "OK", null);
+        return new R(200, "OK", "success");
     }
 
     public static<E> R ok (E msg) {

@@ -59,7 +59,7 @@ public interface CacheService {
 
     Set<Object> getSetFromRedis(String key);
 
-    Map<String, Double> getScoreSetFromRedis(String key);
+    Map<String, Double> getScoreSetFromRedis(String key, int flag);
 
     String getHashFromRedis(String key, String field);
 

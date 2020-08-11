@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.autohome.server.dao.UsedCarDao">
+
+    <insert id="insertUsedCar" parameterType="com.autohome.common.dto.UsedCarGeneralDto">
+
+    </insert>
+
+    <delete id="deleteUsedCarBySystem">
+        delete from used_car_general
+        where id=#{uniqueId}
+    </delete>
+
+    <update id="deleteUsedCarByUser">
+        update used_car_general
+        set flag = 3
+        where car_id=#{cid} and uid=#{uid} and id=#{uniqueId}
+    </update>
+
+    <update id="updateUsedCarByUser" parameterType="com.autohome.common.dto.UsedCarGeneralDto">
+        update used_car_general
+        set #{style_description},#{car_price},#{car_registration_time},#{performance_mileage}
+            ,#{change_number},#{license_location},#{meeting_place};
+        where car_id=#{cid} and uid=#{uid} and id=#{uniqueId}
+    </update>
+
+    <select id="getAllUsedCar" resultType="com.autohome.entity.UsedCarGeneral">
+        select car_id,style_description,car_price,car_registration_time
+            ,performance_mileage,removal_standard,displacement,change_number
+            ,license_location,upload_time,gearbox,meeting_place,uid
+        from used_car_general
+        where flag=2
+    </select>
+
+    <update id="updateUsedCarFlag">
+        update used_car_general
+        set flag=#{flag}
+        where uid=#{uid} and car_id=#{cid}
+    </update>
+
+    <select id="getAllUserUsedCar" resultType="com.autohome.entity.UsedCarGeneral">
+        select car_id,style_description,car_price,car_registration_time
+            ,performance_mileage,removal_standard,displacement,change_number
+            ,license_location,upload_time,gearbox,meeting_place,uid
+        from used_car_general
+        where uid=#{uid}
+        <if test="cid != -1">
+            and car_id=#{cid}
+        </if>
+        <if test="uniqueId != -1">
+            and id=#{uniqueId}
+        </if>
+    </select>
+
+</mapper>

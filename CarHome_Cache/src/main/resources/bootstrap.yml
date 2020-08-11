@@ -2,7 +2,7 @@ server:
   port: 8089
 spring:
   application:
-    name: cacheserver
+    name: ztk-cacheserver
   cloud:
     nacos:
       discovery: #使用Nacos作为服务的注册中心

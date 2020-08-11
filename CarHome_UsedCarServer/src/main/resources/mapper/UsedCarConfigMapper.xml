@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.autohome.server.dao.UsedCarConfigDao">
+
+
+    <resultMap id="base_usedCarConfig" type="com.autohome.entity.UsedCarConfig">
+        <id property="id" column="id"/>
+        <result column="safety_equipment" property="safety_equipment" javaType="com.google.gson.JsonElement" typeHandler="com.autohome.server.convert.JsonTypeHandler"/>
+        <result column="auxiliary_control" property="auxiliary_control" javaType="com.google.gson.JsonElement" typeHandler="com.autohome.server.convert.JsonTypeHandler"/>
+        <result column="interior_collocation" property="interior_collocation" javaType="com.google.gson.JsonElement" typeHandler="com.autohome.server.convert.JsonTypeHandler"/>
+        <result column="licence_plate" property="licence_plate" javaType="com.google.gson.JsonElement" typeHandler="com.autohome.server.convert.JsonTypeHandler"/>
+    </resultMap>
+
+    <insert id="insertUsedCarConfig" parameterType="com.autohome.entity.UsedCarConfig">
+        insert into used_car_config
+        (style_description,guidance_price,model_level,energy_type
+        ,environmental_standard,ttm,maximum_power,maximum_torque
+        ,engine_type,gearshift_type,displacement,car_volume,body_structure
+        ,maximum_speed,acceleration_capability,fuel_consumption,wheel_base
+        ,fuel_capacity,trunk_capacity,safety_equipment,auxiliary_control
+        ,interior_collocation,media_collocation,cid,licence_plate,uid)
+        values
+        (#{style_description},#{guidance_price},#{model_level},#{energy_type}
+        ,#{environmental_standard},#{ttm},#{maximum_power},#{maximum_torque}
+        ,#{engine_type},#{gearshift_type},#{displacement},#{car_volume}
+        ,#{body_structure},#{maximum_speed},#{acceleration_capability}
+        ,#{fuel_consumption},#{wheel_base},#{fuel_capacity},#{trunk_capacity}
+        ,#{safety_equipment,typeHandler=com.autohome.server.convert.JsonTypeHandler}
+        ,#{auxiliary_control,typeHandler=com.autohome.server.convert.JsonTypeHandler}
+        ,#{interior_collocation,typeHandler=com.autohome.server.convert.JsonTypeHandler}
+        ,#{media_collocation,typeHandler=com.autohome.server.convert.JsonTypeHandler}
+        ,#{cid},#{licence_plate,typeHandler=com.autohome.server.convert.JsonTypeHandler}
+        ,#{uid})
+
+    </insert>
+
+    <delete id="deleteUsedCarConfig">
+        delete from used_car_config
+        where cid = #{cid} and uid = #{uid} and id = #{uniqueId}
+    </delete>
+    
+    <update id="updateLicencePlate">
+        update used_car_config
+        set licence_plate=#{licence_plate,typeHandler=com.autohome.server.convert.JsonTypeHandler}
+        where cid=#{cid} and uid=#{uid} and id=#{uniqueId}
+    </update>
+
+    <select id="getCarUsedConfig" resultMap="base_usedCarConfig">
+        select *
+        from used_car_config
+        where uid = #{uid}
+        <if test="cid != -1">
+            and cid = #{cid}
+        </if>
+    </select>
+
+    <select id="getLicencePlate" resultType="com.google.gson.JsonObject">
+        select licence_plate
+        from used_car_config
+        where uid=#{uid} and cid=#{cid} and id=#{uniqueId}
+    </select>
+    
+</mapper>

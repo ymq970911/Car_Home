@@ -1,4 +1,4 @@
-package com.autohome.server.service.impl;
+package com.autohome.server.service;
 
 import com.aliyuncs.utils.StringUtils;
 import com.autohome.common.vo.R;
@@ -8,6 +8,7 @@ import com.autohome.server.service.CarLevelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.applet.Main;
 
 /**
  * @Class: CarLevelServiceImpl
@@ -59,10 +60,5 @@ public class CarLevelServiceImpl implements CarLevelService {
     @Override
     public R getAllLevels() {
         return R.ok(dao.selectAll());
-    }
-
-    @Override
-    public R getLevelById(Integer id) {
-        return R.ok(dao.selectOne(id));
     }
 }

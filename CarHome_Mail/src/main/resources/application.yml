@@ -20,3 +20,12 @@ spring:
         - Path=/open/** #请求路径也就是外界需要请求的名称，如果i请求匹配，那么就会转发请求到对应的服务
         filters:
         - StripPrefix=1 #设置路由p匹配的时候，去除路径的层级
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.94.193.104:3306/db_carhome?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+    mapper-locations: classpath*:mapper/*Mapper.xml

@@ -2,25 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.autohome.server.dao.NewsDao">
-    <insert id="save" parameterType="com.autohome.entity.NewsDetails" keyProperty="ndid" useGeneratedKeys="true">
-        insert into news_details(title, author, ctime, content)
-        values (#{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, now(), #{content,jdbcType=VARCHAR})
+    <insert id="save" parameterType="com.autohome.common.dto.NewsDetailsDto">
+        insert into news_details(title, author, ctime, content, nid)
+        values (#{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, now(), #{content,jdbcType=VARCHAR},
+                #{nid,jdbcType=INTEGER})
     </insert>
 
-        <delete id="delete">
-        </delete>
+    <delete id="delete">
+        delete
+        from news_details
+        where ndid = #{id,jdbcType=INTEGER}
+    </delete>
 
-        <update id="update">
-        </update>
+    <update id="update" parameterType="com.autohome.common.dto.NewsDetailsIdDto">
+        update news_details
+        set title=#{title,jdbcType=VARCHAR},
+            author=#{author,jdbcType=VARCHAR},
+            content=#{content,jdbcType=VARCHAR}
+        where ndid = #{ndid,jdbcType=INTEGER}
+    </update>
 
-        <select id="getAllByPage" resultType="com.autohome.common.dto.NewsDetailsDto">
-            select ndid, title, author, ctime, content, comment_id from news_details
-            limit #{pageNum,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
-        </select>
+    <select id="getAllByPage" resultType="com.autohome.common.dto.NewsDetailsIdDto">
+        select ndid,
+               title,
+               author,
+               ctime,
+               content,
+               comment_id,
+               img_id,
+               nid
+        from news_details
+    </select>
 
-        <select id="getOneById" resultType="com.autohome.common.dto.NewsDetailsDto">
-        </select>
+    <select id="getOneById" resultType="com.autohome.common.dto.NewsDetailsIdDto">
+        select ndid,
+               title,
+               author,
+               ctime,
+               content,
+               comment_id,
+               img_id,
+               nid
+        from news_details
+        where ndid = #{id,jdbcType=INTEGER}
+        limit 1
+    </select>
 
-        <select id="getAllByTypeAndPage" resultType="com.autohome.common.dto.NewsDetailsDto">
-        </select>
+    <select id="getAllByTypeAndPage" resultType="com.autohome.common.dto.NewsDetailsIdDto">
+        select ndid,
+               title,
+               author,
+               ctime,
+               content,
+               comment_id,
+               img_id,
+               nid
+        from news_details
+        where nid = #{newsType,jdbcType=INTEGER}
+    </select>
 </mapper>

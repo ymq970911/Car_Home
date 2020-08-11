@@ -5,7 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class NewsDetailsDto implements Serializable {
+public class NewsDetailsIdDto implements Serializable {
+    private Integer ndid;
+
     private String title;
 
     private String author;
@@ -15,5 +17,6 @@ public class NewsDetailsDto implements Serializable {
     private Integer nid;
 
     private static final long serialVersionUID = 1L;
+
 }
 

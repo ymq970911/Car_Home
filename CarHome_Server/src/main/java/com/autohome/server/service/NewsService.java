@@ -1,6 +1,7 @@
 package com.autohome.server.service;
 
 import com.autohome.common.dto.NewsDetailsDto;
+import com.autohome.common.dto.NewsDetailsIdDto;
 import com.autohome.common.vo.R;
 
 /**
@@ -15,7 +16,7 @@ public interface NewsService {
 
     R delNews(Integer id);
 
-    R updateNews(NewsDetailsDto dto);
+    R updateNews(NewsDetailsIdDto dto);
 
     R getAllNewss(Integer pageNum, Integer pageSize);
 

@@ -55,6 +55,12 @@ public class NewsDetails implements Serializable {
     @ApiModelProperty(value = "新闻图片")
     private Integer img_id;
 
+    /**
+     * 新闻分类编号-外键
+     */
+    @ApiModelProperty(value = "新闻分类")
+    private Integer nid;
+
 
     private static final long serialVersionUID = 1L;
 }

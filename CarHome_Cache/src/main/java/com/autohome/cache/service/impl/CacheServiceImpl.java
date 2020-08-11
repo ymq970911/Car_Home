@@ -248,10 +248,24 @@ public class CacheServiceImpl implements CacheService {
         return template.opsForSet().members(key);
     }
 
+    /**
+     *
+     * @param key
+     * @param flag 0 升序，非0 降序
+     * @return
+     */
     @Override
-    public Map<String, Double> getScoreSetFromRedis(String key) {
+    public Map<String, Double> getScoreSetFromRedis(String key, int flag) {
         Map<String, Double> map = new HashMap<>();
-        Set<Object> objects = template.opsForZSet().range(key, 0, -1);
+        Set<Object> objects = null;
+        if (flag != 0) {
+            // 降序
+            objects = template.opsForZSet().reverseRange(key, 0, -1);
+        } else {
+            // 升序
+            objects = template.opsForZSet().range(key, 0, -1);
+        }
+
         if (objects != null) {
             for (Object o : objects) {
                 map.put((String) o, template.opsForZSet().score(key, o));

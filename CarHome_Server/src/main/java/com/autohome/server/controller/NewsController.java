@@ -1,6 +1,7 @@
 package com.autohome.server.controller;
 
 import com.autohome.common.dto.NewsDetailsDto;
+import com.autohome.common.dto.NewsDetailsIdDto;
 import com.autohome.common.vo.R;
 import com.autohome.server.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class NewsController {
      * @return
      */
     @PostMapping("/upd")
-    public R updateNews(@RequestBody NewsDetailsDto dto) {
+    public R updateNews(@RequestBody NewsDetailsIdDto dto) {
         return service.updateNews(dto);
     }
 

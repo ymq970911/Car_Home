@@ -50,16 +50,8 @@ public class CacheServiceImpl implements CacheService {
      */
     @Override
     public boolean saveStr2Redis(String key, long expireTimeSeconds, String value) throws CacheException {
-        try {
-            if (expireTimeSeconds <= 0) {
-                expireTimeSeconds = -1;
-            }
-            template.opsForValue().set(key, value, expireTimeSeconds, TimeUnit.SECONDS);
-            return true;
-        } catch (Exception e) {
-            log.error("存储异常");
-            throw new CacheException("存储异常" + e.getMessage());
-        }
+        template.opsForValue().set(key, value, expireTimeSeconds, TimeUnit.SECONDS);
+        return true;
     }
 
     @Override
@@ -248,10 +240,23 @@ public class CacheServiceImpl implements CacheService {
         return template.opsForSet().members(key);
     }
 
+    /**
+     * @param key
+     * @param flag 0 升序，非0 降序
+     * @return
+     */
     @Override
-    public Map<String, Double> getScoreSetFromRedis(String key) {
+    public Map<String, Double> getScoreSetFromRedis(String key, int flag) {
         Map<String, Double> map = new HashMap<>();
-        Set<Object> objects = template.opsForZSet().range(key, 0, -1);
+        Set<Object> objects = null;
+        if (flag != 0) {
+            // 降序
+            objects = template.opsForZSet().reverseRange(key, 0, -1);
+        } else {
+            // 升序
+            objects = template.opsForZSet().range(key, 0, -1);
+        }
+
         if (objects != null) {
             for (Object o : objects) {
                 map.put((String) o, template.opsForZSet().score(key, o));

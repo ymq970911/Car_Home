@@ -15,7 +15,7 @@ spring:
           lower-case-service-id: true #统一改为小写访问
       routes:
       - id: gatewayapi #随便起名保持唯一
-        uri: lb://api #标记匹配的服务，如果来自注册中心，那么需要是使用lb:服务的名称
+        uri: lb://jyapi #标记匹配的服务，如果来自注册中心，那么需要是使用lb:服务的名称
         predicates:
         - Path=/car/** #请求路径也就是外界需要请求的名称，如果i请求匹配，那么就会转发请求到对应的服务
         filters:

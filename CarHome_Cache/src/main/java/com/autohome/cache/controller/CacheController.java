@@ -84,9 +84,15 @@ public class CacheController {
         return R.ok(service.getSetFromRedis(key));
     }
 
+    /**
+     * zset 自动排序
+     * @param key 指定zset的 key 名
+     * @param flag 0 升序，非0 降序
+     * @return
+     */
     @GetMapping("/getzset.do")
-    public R getScoreSetFromRedis(String key) {
-        return R.ok(service.getScoreSetFromRedis(key));
+    public R getScoreSetFromRedis(String key, int flag) {
+        return R.ok(service.getScoreSetFromRedis(key, flag));
     }
 
     @GetMapping("/gethash2.do")
@@ -120,12 +126,12 @@ public class CacheController {
         return R.ok(service.keys(prefile));
     }
 
-    @PostMapping("/")
+    @PostMapping("/expire.do")
     public R expire(String key, long time, TimeUnit timeUnit) {
         return R.ok(service.expire(key, time, timeUnit));
     }
 
-    @PostMapping
+    @PostMapping("/delkeys")
     public R delKeys(String... keys) {
         return R.ok(service.delKey(keys));
     }

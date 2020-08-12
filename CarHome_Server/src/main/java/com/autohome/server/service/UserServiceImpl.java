@@ -1,4 +1,4 @@
-package com.autohome.server.service.impl;
+package com.autohome.server.service;
 
 import com.autohome.common.baidu.CensorUtil;
 import com.autohome.common.util.StringUtil;

@@ -1,4 +1,4 @@
-package com.autohome.server.service.impl;
+package com.autohome.server.service;
 
 import com.aliyuncs.utils.StringUtils;
 import com.autohome.common.dto.NewsDetailsDto;

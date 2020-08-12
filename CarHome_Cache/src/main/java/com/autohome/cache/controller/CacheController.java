@@ -115,6 +115,7 @@ public class CacheController {
         return R.ok(service.gethashStrFromRedis(key));
     }
 
+
     @GetMapping("/checkkey.do")
     public R checkKey(String key) {
         return R.ok(service.checkKey(key));

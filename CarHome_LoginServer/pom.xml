@@ -9,12 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>CarHome_Mail</artifactId>
+    <artifactId>CarHome_LoginServer</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
         <!--        nacos服务与注册-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -22,15 +18,10 @@
             <version>2.2.1.RELEASE</version>
         </dependency>
 
+        <!--springboot-->
         <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>swagger-bootstrap-ui</artifactId>
-            <version>1.9.6</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -43,23 +34,7 @@
             <artifactId>CarHome_Entity</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.autohome</groupId>
-            <artifactId>CarHome_Cache</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
 
-        <!--springboot-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>
         <!--mybatis-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -76,10 +51,13 @@
             <artifactId>druid</artifactId>
             <version>1.1.21</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+            <version>2.2.3.RELEASE</version>
+        </dependency>
 
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -88,4 +66,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

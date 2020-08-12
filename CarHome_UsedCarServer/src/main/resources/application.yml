@@ -2,7 +2,7 @@ server:
   port: 8013 #自定义配置文件
 spring:
   application:
-    name: usedCar-server  #服务名称
+    name: usedcar  #服务名称
   cloud:
     nacos:
       discovery:

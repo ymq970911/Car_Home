@@ -10,13 +10,13 @@ public class CheckUtil {
 
     public static String paramChecking(Integer cid, Integer uid, Integer uniqueId) {
         StringBuilder result = new StringBuilder();
-        if (cid != null || cid <= 0) {
+        if (cid != null && cid <= 0) {
             result.append("汽车信息输入错误！");
         }
-        if (uniqueId != null || uniqueId <= 0) {
+        if (uniqueId != null && uniqueId <= 0) {
             result.append("uniqueId错误！");
         }
-        if (uid == null || uid <= 0) {
+        if (uid == null && uid <= 0) {
             result.append("用户信息输入错误！");
             return result.toString();
         }

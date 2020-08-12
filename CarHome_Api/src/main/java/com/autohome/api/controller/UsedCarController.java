@@ -1,8 +1,8 @@
-package com.autohome.server.controller;
+package com.autohome.api.controller;
 
-import com.autohome.common.vo.R;
+import com.autohome.api.service.UsedCarService;
 import com.autohome.common.dto.UsedCarGeneralDto;
-import com.autohome.server.service.UsedCarService;
+import com.autohome.common.vo.R;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
  * @program: car_home
  * @description:
  * @author: ztk
- * @create: 2020-08-10 02:01
+ * @create: 2020-08-11 21:07
  **/
 
 @Api(tags = "二手车概况")
-@RequestMapping("/server/usedcar/general")
 @RestController
+@RequestMapping("/api/usedcar")
 public class UsedCarController {
     @Autowired
     private UsedCarService usedCarService;
@@ -56,7 +56,5 @@ public class UsedCarController {
     public R getUserCar(@PathVariable Integer uid, @PathVariable(required = false) Integer cid, @PathVariable(required = false) Integer uniqueId) {
         return usedCarService.getUserUsedCar(uid, cid, uniqueId);
     }
-
-
 
 }

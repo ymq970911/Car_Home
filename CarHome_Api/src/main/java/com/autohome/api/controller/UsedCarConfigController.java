@@ -1,10 +1,11 @@
-package com.autohome.server.controller;
+package com.autohome.api.controller;
 
-import com.autohome.common.vo.R;
-import com.autohome.common.jsonpojo.LicencePlate;
+import com.autohome.api.service.UsedCarConfigService;
 import com.autohome.common.dto.LicencePlateDto;
-import com.autohome.server.service.UsedCarConfigService;
+import com.autohome.common.jsonpojo.LicencePlate;
+import com.autohome.common.vo.R;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
  * @program: car_home
  * @description:
  * @author: ztk
- * @create: 2020-08-09 01:08
+ * @create: 2020-08-12 15:18
  **/
+
 @RestController
 @Api(tags = "二手车详情")
-@RequestMapping("/server/usedcar/config")
+@RequestMapping("/api/usedcar/config")
 public class UsedCarConfigController {
     @Autowired
     private UsedCarConfigService service;

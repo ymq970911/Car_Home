@@ -10,8 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>CarHome_Mail</artifactId>
-
     <dependencies>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
         <!--        nacos服务与注册-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -29,16 +32,21 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.autohome</groupId>
             <artifactId>CarHome_Common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-simple</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.autohome</groupId>
+            <artifactId>CarHome_Entity</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.autohome</groupId>
+            <artifactId>CarHome_Cache</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <!--springboot-->
@@ -52,6 +60,23 @@
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
         </dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.21</version>
+        </dependency>
+
 
     </dependencies>
 

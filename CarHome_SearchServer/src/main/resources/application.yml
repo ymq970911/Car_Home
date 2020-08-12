@@ -7,3 +7,12 @@ spring:
     nacos:
       discovery:
         server-addr: 47.94.193.104:8848  #注册中心地
+  elasticsearch:
+    rest:
+      uris: 39.100.255.221:9200
+  rabbitmq:
+    host: 39.100.255.221
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /

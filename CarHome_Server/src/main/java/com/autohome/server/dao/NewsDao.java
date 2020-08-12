@@ -1,6 +1,7 @@
 package com.autohome.server.dao;
 
 import com.autohome.common.dto.NewsDetailsDto;
+import com.autohome.common.dto.NewsDetailsIdDto;
 import com.autohome.common.vo.R;
 import com.autohome.entity.NewsDetails;
 import org.apache.ibatis.annotations.Param;
@@ -16,15 +17,15 @@ import java.util.List;
  */
 @Repository
 public interface NewsDao {
-    int save(NewsDetails newsDetails);
+    int save(NewsDetailsDto dto);
 
     int delete(Integer id);
 
-    int update(NewsDetailsDto dto);
+    int update(NewsDetailsIdDto dto);
 
-    List<NewsDetailsDto> getAllByPage(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);
+    List<NewsDetailsIdDto> getAllByPage();
 
-    NewsDetailsDto getOneById(Integer id);
+    NewsDetailsIdDto getOneById(Integer id);
 
-    List<NewsDetailsDto> getAllByTypeAndPage(Integer pageNum, Integer pageSize, Integer newsType);
+    List<NewsDetailsIdDto> getAllByTypeAndPage(Integer newsType);
 }

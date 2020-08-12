@@ -50,16 +50,8 @@ public class CacheServiceImpl implements CacheService {
      */
     @Override
     public boolean saveStr2Redis(String key, long expireTimeSeconds, String value) throws CacheException {
-        try {
-            if (expireTimeSeconds <= 0) {
-                expireTimeSeconds = -1;
-            }
-            template.opsForValue().set(key, value, expireTimeSeconds, TimeUnit.SECONDS);
-            return true;
-        } catch (Exception e) {
-            log.error("存储异常");
-            throw new CacheException("存储异常" + e.getMessage());
-        }
+        template.opsForValue().set(key, value, expireTimeSeconds, TimeUnit.SECONDS);
+        return true;
     }
 
     @Override
@@ -249,7 +241,6 @@ public class CacheServiceImpl implements CacheService {
     }
 
     /**
-     *
      * @param key
      * @param flag 0 升序，非0 降序
      * @return

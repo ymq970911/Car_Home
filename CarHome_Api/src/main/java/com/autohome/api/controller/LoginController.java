@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     @Autowired
     private LoginService loginService;
+
     @GetMapping("/userlogin.do/{str}/{psw}")
-   public R checkUser(@PathVariable String str, @PathVariable String psw){
-       return loginService.checkUser(str,psw);
+    public R checkUser(@PathVariable("str") String str, @PathVariable("psw") String psw) {
+        return loginService.checkUser(str, psw);
     }
 }

@@ -15,18 +15,13 @@ public class MailController {
     private MailService mailServcer;
 
     @GetMapping("/sendCodeMail.do")
-    public R sendMail(@RequestParam String to,@RequestParam String str) {
-        R r = mailServcer.sendCodeMail(to,str);
-        return r;
+    public R sendMail(String to, String str) {
+        return mailServcer.sendCodeMail(to, str);
     }
 
     @GetMapping("/sendUserMail.do")
-    public R sendUserMail(@RequestParam String to,@RequestParam String name,
-                          @RequestParam String password) {
-        R r = mailServcer.sendUserMail(to,name,password);
-        return r;
+    public R sendUserMail(String to, String userAndPass) {
+        return mailServcer.sendUserMail(to, userAndPass);
     }
-
-
-
 }
+

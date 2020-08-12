@@ -3,6 +3,7 @@ package com.autohome.cache.controller;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.autohome.cache.exception.CacheException;
 import com.autohome.cache.service.CacheService;
+import com.autohome.common.dto.RedisStrDto;
 import com.autohome.common.vo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class CacheController {
     //实现常用的操作
     @SentinelResource(fallback = "saveError")
     @PostMapping("/savestr.do")
-    public R saveStr2Redis(@RequestParam String key, @RequestParam long times, @RequestParam String value) throws CacheException {
-        return R.ok(service.saveStr2Redis(key, times, value));
+    public R saveStr2Redis(@RequestBody RedisStrDto dto) throws CacheException {
+        return R.ok(service.saveStr2Redis(dto.getKey(), dto.getTimes(), dto.getValue()));
     }
 
     //降级方法
@@ -86,7 +87,8 @@ public class CacheController {
 
     /**
      * zset 自动排序
-     * @param key 指定zset的 key 名
+     *
+     * @param key  指定zset的 key 名
      * @param flag 0 升序，非0 降序
      * @return
      */

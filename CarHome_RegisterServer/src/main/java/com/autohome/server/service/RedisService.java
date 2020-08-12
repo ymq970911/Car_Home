@@ -1,18 +1,18 @@
 package com.autohome.server.service;
 
 import com.autohome.common.vo.R;
-import org.apache.ibatis.cache.CacheException;
+import com.autohome.server.dto.RedisStrDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient("cacheserver")
 public interface RedisService {
     @PostMapping(value = "/cache/api/savestr.do")
-     R saveStr2Redis(@RequestParam String key, @RequestParam long times, @RequestParam String value);
+    R saveStr2Redis(@RequestBody RedisStrDto dto);
 
     @GetMapping("/cache/api/getstr.do")
-    public R getStrFromRedis(String key);
+    R getStrFromRedis(String key);
 
 }

@@ -14,6 +14,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @MapperScan("com.autohome.server.dao")
 public class RegisterApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RegisterApplication.class,args);
+        SpringApplication.run(RegisterApplication.class, args);
     }
 }

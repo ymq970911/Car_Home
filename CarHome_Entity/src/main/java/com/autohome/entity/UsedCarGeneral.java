@@ -3,6 +3,8 @@ package com.autohome.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 
 @ApiModel(value = "com-autohome-entity-UsedCarGeneral")
@@ -39,35 +41,64 @@ public class UsedCarGeneral implements Serializable {
     private String car_registration_time;
 
     /**
-     * 车辆年审时间（年.月）
+     * 表现里数
      */
-    @ApiModelProperty(value = "车辆年审时间（年.月）")
-    private String car_audit_time;
+    @ApiModelProperty(value = "表现里数")
+    private Double performance_mileage;
 
     /**
-     * 交强险截至日期（年.月）
+     * 准迁地标准
      */
-    @ApiModelProperty(value = "交强险截至日期（年.月）")
-    private String insurance_deadline_time;
+    @ApiModelProperty(value = "准迁地标准")
+    private String removal_standard;
 
     /**
-     * 车使用税有效日期（年.月）
+     * 排量
      */
-    @ApiModelProperty(value = "车使用税有效日期（年.月）")
-    private String car_tax_time;
+    @ApiModelProperty(value = "排量")
+    private String displacement;
 
     /**
-     * 原厂保质（年.月）
+     * 过户次数
      */
-    @ApiModelProperty(value = "原厂保质（年.月）")
-    private String rma_time;
+    @ApiModelProperty(value = "过户次数")
+    private Integer change_number;
 
     /**
-     * 图片编号-外键
+     * 牌照地点
      */
-    @ApiModelProperty(value = "汽车图片")
-    private Integer img_id;
+    @ApiModelProperty(value = "牌照地点")
+    private String license_location;
 
+    /**
+     * 上架时间
+     */
+    @ApiModelProperty(value = "上架时间")
+    private Date upload_time;
+
+    /**
+     * 变速箱
+     */
+    @ApiModelProperty(value = "变速箱")
+    private String gearbox;
+
+    /**
+     * 看车地点
+     */
+    @ApiModelProperty(value = "看车地点")
+    private String meeting_place;
+
+    /**
+     * 车主id
+     */
+    @ApiModelProperty(value = "车主id")
+    private Integer uid;
+
+    /**
+     * 标记位，1发布2未发布3过期
+     */
+    @ApiModelProperty(value = "标记位，1发布2未发布3过期")
+    private Integer flag;
 
     private static final long serialVersionUID = 1L;
 }

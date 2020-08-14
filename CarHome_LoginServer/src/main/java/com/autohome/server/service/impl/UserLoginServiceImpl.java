@@ -18,21 +18,18 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     private RedisService redisService;
 
-
     @Override
-    public R checkUser(String str,String psw) {
+    public R checkUser(String str, String psw) {
 
-        UserLoginDto user = userLoginDao.selectUser(str,psw);
+        UserLoginDto user = userLoginDao.selectUser(str, psw);
         //根据用户输入的账号，密码查询数据库
-        if (user != null){
-            R r = redisService.saveStr2Redis(USERLOGIN_TOKEN + str, TOKEN_TIME, user.toString());
-            return r;
-        }else {
+        if (user != null) {
+            return redisService.saveStr2Redis(USERLOGIN_TOKEN + str, TOKEN_TIME, user.toString());
+        } else {
             return R.fail("账号密码错误，请重试");
         }
-
-        }
-        //校验用户是否存在
+    }
+    //校验用户是否存在
 
 
 }

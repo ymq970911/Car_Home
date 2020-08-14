@@ -11,7 +11,11 @@ public interface UserRegisterDao {
 
     void insertUser(UserLoginDto user);
 
-    List<UserLoginDto> selectOneUser(String str);
+    User selectUserByUsername(String username);
+
+    User selectUserByEmail(String email);
+
+    List<String> selectAll();
 
 //    void changePsw(int uid,String pws);
 

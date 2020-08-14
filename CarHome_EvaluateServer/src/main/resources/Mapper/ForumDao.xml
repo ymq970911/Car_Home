@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autohome.server.dao.ForumDao">
+    <select id="selectForumByName" resultType="com.autohome.common.dto.ForumDto">
+
+        select forum_name from forum where forum_name like CONCAT(CONCAT('%', #{forum_name}), '%')
+
+    </select>
+
+    <select id="selectAllForum" resultType="com.autohome.common.dto.ForumDto">
+
+        select f.* from forum as f
+
+    </select>
+
+    <insert id="addForum_favorite" parameterType="com.autohome.entity.ForumFavorite">
+
+        insert into forum_favorite(favorite_id,favorite_name) value (#{favorite_id},#{favorite_name})
+
+    </insert>
+</mapper>

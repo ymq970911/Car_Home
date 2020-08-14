@@ -61,4 +61,9 @@ public class CarLevelServiceImpl implements CarLevelService {
     public R getAllLevels() {
         return R.ok(dao.selectAll());
     }
+
+    @Override
+    public R getLevelById(Integer id) {
+        return R.ok(dao.selectOne(id));
+    }
 }

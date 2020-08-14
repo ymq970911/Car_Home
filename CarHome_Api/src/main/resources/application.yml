@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: jyapi  #服务名称
+    name: api  #服务名称
   cloud:
     nacos:
       discovery:

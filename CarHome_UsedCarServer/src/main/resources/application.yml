@@ -1,0 +1,19 @@
+server:
+  port: 8013 #自定义配置文件
+spring:
+  application:
+    name: usedcar  #服务名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.94.193.104:8848  #注册中心
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bd_carhome?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: desire
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-handlers-package: com.autohome.server.convert

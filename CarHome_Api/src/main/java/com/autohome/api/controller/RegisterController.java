@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "用户注册模块接口")
 @RestController
-@RequestMapping("/api/registerservice")
+@RequestMapping("/api/register")
 public class RegisterController {
     @Autowired
     private RegisterService registerService;
 
     @GetMapping("/sendMail.do/{to}")
     public R sendMail(@PathVariable String to) {
-        return  registerService.sendMail(to);
+        return registerService.sendMail(to);
     }
 
     @PostMapping("/createUserByEmial.do/{code}/{email}")
-    public R createUserByEmial(@PathVariable String code,@PathVariable String email){
+    public R createUserByEmial(@PathVariable String code, @PathVariable String email) {
         return createUserByEmial(code, email);
 
     }

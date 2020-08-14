@@ -14,7 +14,7 @@ import java.io.IOException;
  * @create: 2020-07-15 17:12
  */
 @Component
-@WebFilter("/*")
+//@WebFilter("/*")
 public class CROSFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

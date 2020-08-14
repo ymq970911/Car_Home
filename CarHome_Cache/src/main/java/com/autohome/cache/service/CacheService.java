@@ -83,4 +83,6 @@ public interface CacheService {
     boolean lock(String key, long timeseconds);
 
     boolean unlock(String key);
+
+    Set<Object> getReverseRangeFromRedis(String key, long start, long end);
 }

@@ -3,62 +3,110 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.autohome.server.dao.BrandLevelDao">
     <resultMap id="CarByBrandIdDto" type="com.autohome.common.dto.GetCarByBrandIdDto">
-       <result property="name" column="name"/>
+        <result property="name" column="name"/>
         <result property="logo" column="logo"/>
         <collection property="car" ofType="com.autohome.common.dto.CarDto">
-           <id column="car_id" property="car_id"/>
+            <id column="car_id" property="id"/>
             <result column="car_name" property="car_name"/>
             <result column="car_price" property="car_price"/>
             <result column="car_image" property="url"/>
+            <result column="img_id" property="img_id"/>
             <result column="model_level" property="model_level"/>
-            <result column="type" property="type"/>
+            <result column="car_type" property="car_type"/>
+            <result column="attention" property="attention"/>
         </collection>
     </resultMap>
     <sql id="a">
         SELECT bl.name,
                i1.url         AS logo,
                cg.id          as car_id,
-               cg.id          as car_id,
                cg.model_level as model_level,
-               cg.type        as type,
+               cg.car_type,
                cg.car_name,
                cg.car_price,
-               cg.url         AS car_image
+               cg.attention,
+               cg.url         AS car_image,
+               cg.img_id
         FROM brand_level AS bl
-                 LEFT JOIN image AS i1 ON bl.bid = i1.bid
+                 LEFT JOIN image AS i1 ON bl.img_id = i1.iid
                  LEFT JOIN (
-            SELECT c.id, c.bid, c.car_name, c.car_price, c.model_level, c.type, i.url
+            SELECT c.id,
+                   i.type as img_type,
+                   c.bid,
+                   c.car_name,
+                   c.attention,
+                   c.car_price,
+                   c.model_level,
+                   c.type as car_type,
+                   c.img_id,
+                   i.url
             FROM car_general AS c
-                     LEFT JOIN image AS i ON i.cid = c.id
-        ) AS cg ON bl.bid = cg.bid  where bl.bid=#{bid}
+                     LEFT JOIN image AS i ON i.iid = c.img_id
+        ) AS cg ON bl.bid = cg.bid
+        where bl.bid = 1
+          and cg.img_type = 2
     </sql>
     <sql id="b">
-        SELECT b.bid,b.name,i.url FROM brand_level b,image i WHERE b.bid=i.bid
+        SELECT b.bid, b.name, i.url
+        FROM brand_level b,
+             image i
+        WHERE b.img_id = i.iid
+          and i.type = 6
     </sql>
+    <update id="updateCarAttention">
+        update car_general
+        set attention=(#{attention} + 1)
+        where id = #{id};
+    </update>
+
     <select id="getAllBrandLevDto" resultType="com.autohome.common.dto.BrandLevDto">
         <include refid="b"/>
     </select>
 
     <select id="getBrandById" resultType="com.autohome.common.dto.BrandLevDto">
         <include refid="b"/>
-         and b.bid=#{bid} ORDER BY  convert(b.name USING gbk)
+        and b.bid=#{bid} ORDER BY convert(b.name USING gbk)
     </select>
 
     <select id="getBrandIdAndModelLevelAndType" resultType="com.autohome.common.dto.GetCarDto">
-    select c.id,c.car_name,c.car_price,c.q ,c.type,i.url from car_general c left join image i on c.id=i.cid
-    <where>
-        <if test="type!=null">
-            c.type=#{type}
-        </if>
-        <if test="model_level!=null">
-          and  c.model_level=#{model_level}
-        </if>
-        <if test="bid!=null">
-               and c.bid=#{bid}
-        </if>
-</where>
+        select c.id,c.car_name,c.car_price,c.model_level ,c.type ,i.url from car_general c left join image i
+        on c.img_id=i.iid
+        <where>
+            <if test="type!=null">
+                c.type=#{type}
+            </if>
+            <if test="model_level!=null">
+                and c.model_level=#{model_level}
+            </if>
+            <if test="bid!=null">
+                and c.bid=#{bid}
+            </if>
+            and i.type=2
+        </where>
     </select>
     <select id="getCarByBrandId" resultMap="CarByBrandIdDto">
         <include refid="a"/>
     </select>
+    <select id="getCarAttention" resultType="com.autohome.common.dto.CarDto">
+        select c.id,
+               c.car_name,
+               c.car_price,
+               c.model_level,
+               c.attention,
+               i.url,
+               c.img_id,
+               c.type as car_type
+        from car_general c
+                 left join image i on c.img_id = i.iid
+        where i.type = 2
+          and c.type = 1
+        order by c.attention desc;
+    </select>
+    <select id="getCarAttentionById" resultType="com.autohome.common.dto.UpdateOrAddCarAttention">
+        select attention
+        from car_general
+        where id = #{id}
+    </select>
+
+
 </mapper>

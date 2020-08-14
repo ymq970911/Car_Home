@@ -15,15 +15,15 @@ public class BrandLeveController {
     @Autowired
     private BrandLeveService service;
 
-    @GetMapping("getallbrandlevel.do")
-    public R getAllCarGeneral() {
-        return service.getAllBrandLevel();
+    @GetMapping("getAllBrandLevel.do")
+    public R getAllBrandLevDto() {
+        return service.getAllBrandLevDto();
     }
 
-    @GetMapping("getbrandbyId.do")
-    public R getBrandById(Integer bid) {
+    @GetMapping("getcarbybrandid.do")
+    public R getCarByBrandId( Integer bid) {
         System.out.println(bid);
-        return service.getBrandById(bid);
+        return service.getCarByBrandId(bid);
     }
 
     @GetMapping("getbrandidandmodellevelAndtype.do")
@@ -31,8 +31,13 @@ public class BrandLeveController {
         return service.getBrandIdAndModelLevelAndType(type, model_level, bid);
     }
 
-    @GetMapping("getcarbybrandid.do")
-    public R getCarByBrandId(Integer bid) {
-        return service.getCarByBrandId(bid);
+    @GetMapping("GetBrandById.do")
+    public R GetBrandById(@RequestParam Integer bid) {
+        return service.GetBrandById(bid);
+    }
+
+    @GetMapping("leaderboard.do")
+    public R leaderboard(@RequestParam Integer bid) {
+        return service.leaderboard(bid);
     }
 }

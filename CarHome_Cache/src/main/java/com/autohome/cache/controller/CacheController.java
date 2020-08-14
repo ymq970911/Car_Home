@@ -1,14 +1,17 @@
 package com.autohome.cache.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.fastjson.JSON;
 import com.autohome.cache.exception.CacheException;
 import com.autohome.cache.service.CacheService;
 import com.autohome.common.dto.RedisStrDto;
 import com.autohome.common.vo.R;
+import com.autohome.common.zset.ZsetDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @create: 2020-08-06 10:35
  */
 @RestController
-@RequestMapping("/cache/api")
+@RequestMapping("cache/api")
 @Slf4j
 public class CacheController {
     @Autowired
@@ -30,8 +33,11 @@ public class CacheController {
     //实现常用的操作
     @SentinelResource(fallback = "saveError")
     @PostMapping("/savestr.do")
-    public R saveStr2Redis(@RequestBody RedisStrDto dto) throws CacheException {
-        return R.ok(service.saveStr2Redis(dto.getKey(), dto.getTimes(), dto.getValue()));
+
+    public R saveStr2Redis(@RequestBody String key, @RequestBody long times,@RequestBody String value) throws CacheException {
+        return R.ok(service.saveStr2Redis(key, times, value));
+
+
     }
 
     //降级方法
@@ -51,8 +57,10 @@ public class CacheController {
     }
 
     @PostMapping("/savezset.do")
-    public R saveScoreSet2Redis(String key, long times, double score, String value) throws CacheException {
-        return R.ok(service.saveScoreSet2Redis(key, times, score, value));
+    public R saveScoreSet2Redis( @RequestBody ZsetDto zsetDto) throws CacheException {
+        return R.ok(service.saveScoreSet2Redis(zsetDto.getKey(), zsetDto.getTimes(),zsetDto.getScore() , zsetDto.getValue()));
+
+
     }
 
     @PostMapping("/savehash.do")
@@ -94,7 +102,13 @@ public class CacheController {
      */
     @GetMapping("/getzset.do")
     public R getScoreSetFromRedis(String key, int flag) {
-        return R.ok(service.getScoreSetFromRedis(key, flag));
+        return R.ok(service.getScoreSetFromRedis(key, flag).toString());
+    }
+
+    @GetMapping("/getreverserange.do")
+    public R getReverseRangeFromRedis(String key,long start,long end) {
+        return R.ok(service.getReverseRangeFromRedis(key,start,end));
+
     }
 
     @GetMapping("/gethash2.do")

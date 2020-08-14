@@ -17,8 +17,6 @@
         <module>CarHome_SearchServer</module>
         <module>CarHome_PayServer</module>
         <module>CarHome_ShopServer</module>
-        <module>CarHome_Cache</module>
-        <module>CarHome_EvaluateServer</module>
         <module>CarHome_Mail</module>
         <module>CarHome_RegisterServer</module>
         <module>CarHome_LoginServer</module>

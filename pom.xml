@@ -18,6 +18,9 @@
         <module>CarHome_PayServer</module>
         <module>CarHome_ShopServer</module>
         <module>CarHome_Mail</module>
+        <module>CarHome_RegisterServer</module>
+        <module>CarHome_LoginServer</module>
+        <module>CarHome_UsedCarServer</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

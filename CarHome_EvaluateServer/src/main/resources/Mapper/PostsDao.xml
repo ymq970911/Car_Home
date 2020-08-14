@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autohome.server.dao.PostsDao">
+    <select id="selectPostsByName" resultType="com.autohome.common.dto.ForumDto">
+
+select title,post_time from posts where title like CONCAT(CONCAT('%', #{title}), '%')
+
+    </select>
+
+    <insert id="addPosts" parameterType="com.autohome.entity.Posts">
+insert into posts(title,content,posts_user,post_time,fid) value (#{title},#{content},#{posts_user},#{post_time},#{fid})
+</insert>
+</mapper>

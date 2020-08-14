@@ -1,0 +1,18 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: evaluateserver #服务名称
+  datasource:
+    derver: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.94.193.104:3306/db_carhome?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.94.193.104:8848  #注册中心地
+
+mybatis:
+  mapper-locations: classpath*:Mapper/*Dao.xml

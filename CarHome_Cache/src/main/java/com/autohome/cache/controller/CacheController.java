@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSON;
 import com.autohome.cache.exception.CacheException;
 import com.autohome.cache.service.CacheService;
+import com.autohome.common.dto.RedisStrDto;
 import com.autohome.common.vo.R;
 import com.autohome.common.zset.ZsetDto;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +33,11 @@ public class CacheController {
     //实现常用的操作
     @SentinelResource(fallback = "saveError")
     @PostMapping("/savestr.do")
+
     public R saveStr2Redis(@RequestBody String key, @RequestBody long times,@RequestBody String value) throws CacheException {
         return R.ok(service.saveStr2Redis(key, times, value));
+
+
     }
 
     //降级方法
@@ -91,7 +95,8 @@ public class CacheController {
 
     /**
      * zset 自动排序
-     * @param key 指定zset的 key 名
+     *
+     * @param key  指定zset的 key 名
      * @param flag 0 升序，非0 降序
      * @return
      */
@@ -125,6 +130,7 @@ public class CacheController {
     public R gethashStrFromRedis(String key) {
         return R.ok(service.gethashStrFromRedis(key));
     }
+
 
     @GetMapping("/checkkey.do")
     public R checkKey(String key) {

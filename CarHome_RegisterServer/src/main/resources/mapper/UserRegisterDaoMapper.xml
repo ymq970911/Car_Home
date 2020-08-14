@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autohome.server.dao.UserRegisterDao">
+    <select id="selectUserByEmail" resultType="com.autohome.entity.User">
+        select id,
+               username,
+               password,
+               sex,
+               name,
+               birth,
+               address,
+               phone,
+               email,
+               money,
+               vip,
+               img_id
+        from user
+        where email = #{email,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="selectUserByUsername" resultType="com.autohome.entity.User">
+        select id,
+               username,
+               password,
+               sex,
+               name,
+               birth,
+               address,
+               phone,
+               email,
+               money,
+               vip,
+               img_id
+        from user
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertUser">
+        insert into user(username, password, email)
+        values (#{userName}, #{psw}, #{mail})
+    </insert>
+
+    <select id="selectAll" resultType="java.lang.String">
+        select username
+        from user
+    </select>
+</mapper>

@@ -13,9 +13,7 @@ public class UserLoginController {
     private UserLoginService userLoginService;
 
     @RequestMapping("/userlogin.do")
-    public R userLoginController(String str,String psw){
-
-        R r = userLoginService.checkUser(str, psw);
-        return r;
+    public R userLoginController(String str, String psw) {
+        return userLoginService.checkUser(str, psw);
     }
 }

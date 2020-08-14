@@ -42,6 +42,7 @@ public class CarServiceServiceImpl implements CarServiceService {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<ServiceFirstLevelDto> requestEntity = new HttpEntity<>(dto, requestHeaders);
+
         return restTemplate.postForObject("http://server/server/carservice/update.do", requestEntity, R.class);
     }
 

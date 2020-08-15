@@ -18,6 +18,7 @@ public class BrandLeveController {
 
     @Autowired
     private BrandLeveService service;
+
     @ApiOperation(value = "查找品牌", notes = "根据name首字母排序")
 
     @GetMapping("getAllBrandLevel.do")
@@ -33,7 +34,7 @@ public class BrandLeveController {
 
     @ApiOperation(value = "查询某品牌下不同类型的车辆信息")
     @GetMapping("getbrandidandmodellevelAndtype.do/{type}/{model_level}/{bid}")
-    public R getBrandIdAndModelLevelAndType(@RequestParam Integer type,@RequestParam  String model_level,@RequestParam  Integer bid) {
+    public R getBrandIdAndModelLevelAndType(@PathVariable Integer type, @PathVariable String model_level, @PathVariable Integer bid) {
         return service.getBrandIdAndModelLevelAndType(type, model_level, bid);
     }
 
@@ -44,7 +45,7 @@ public class BrandLeveController {
         return service.getCarByBrandId(bid);
     }
 
-    @ApiOperation(value = "热度排行榜" , notes="待完善")
+    @ApiOperation(value = "热度排行榜", notes = "根据车辆被关注的数量作为热度值进行降序排序")
     @GetMapping("leaderboard.do/{bid}")
     public R leaderboard(@PathVariable Integer bid) {
         return service.leaderboard(bid);

@@ -2,10 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.autohome.server.dao.UserLoginDao">
+    <sql id="cols">
+        id, username, password, sex, name, birth, address, phone, email, money, vip, img_id
+    </sql>
+
     <select id="selectUser" resultType="com.autohome.common.dto.UserLoginDto">
-        select id
+        select
+        <include refid="cols"/>
         from user
-        where name = {str} or email = {str} or phone = {str}
-        and password= {psw}
+        where ( username = #{username}
+        or email = #{username}
+        or phone = #{username}
+        ) and password = {psw}
+        limit 1
+    </select>
+
+    <select id="checkAccount" resultType="com.autohome.entity.User">
+        select
+        <include refid="cols"/>
+        from user
+        where username=#{account} or phone=#{account} or email=#{account}
+        limit 1
+    </select>
+
+    <select id="getPwdByUsername" resultType="java.lang.String">
+        select password
+        from user
+        where username = #{username}
+        limit 1
+    </select>
+
+    <delete id="changePsw">
+        update user
+        set password=#{password}
+        where username = #{username}
+    </delete>
+
+    <select id="selectUsernameByAccount" resultType="java.lang.String">
+        select username
+        from user
+        where username = #{username}
+           or email = #{username}
+           or phone = #{username}
+        limit 1
     </select>
 </mapper>

@@ -2,39 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.autohome.server.dao.UserRegisterDao">
+    <sql id="cols">
+        id, username, password, sex, name, birth, address, phone, email, money, vip, img_id
+    </sql>
+
     <select id="selectUserByEmail" resultType="com.autohome.entity.User">
-        select id,
-               username,
-               password,
-               sex,
-               name,
-               birth,
-               address,
-               phone,
-               email,
-               money,
-               vip,
-               img_id
+        select
+        <include refid="cols"/>
         from user
         where email = #{email,jdbcType=VARCHAR}
+        limit 1
     </select>
 
-
     <select id="selectUserByUsername" resultType="com.autohome.entity.User">
-        select id,
-               username,
-               password,
-               sex,
-               name,
-               birth,
-               address,
-               phone,
-               email,
-               money,
-               vip,
-               img_id
+        select
+        <include refid="cols"/>
         from user
         where username = #{username,jdbcType=VARCHAR}
+        limit 1
     </select>
 
     <insert id="insertUser">
@@ -45,5 +30,19 @@
     <select id="selectAll" resultType="java.lang.String">
         select username
         from user
+    </select>
+
+    <insert id="insert" parameterType="com.autohome.entity.User">
+        insert into user(username, password, name, birth, phone, email)
+        values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+                #{birth,jdbcType=TIMESTAMP}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectUserByPhone" resultType="com.autohome.entity.User">
+        select
+        <include refid="cols"/>
+        from user
+        where phone=#{phone,jdbcType=VARCHAR}
+        limit 1
     </select>
 </mapper>

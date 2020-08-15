@@ -1,9 +1,13 @@
 package com.autohome.server.service.impl;
 
+import com.autohome.common.dto.NewsDetailsDto;
 import com.autohome.common.vo.R;
 import com.autohome.server.dao.NewsDocumentDao;
+import com.autohome.server.dao.NewsSearchDao;
 import com.autohome.server.domain.NewsDocument;
 import com.autohome.server.service.NewsDocumentService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.WildcardQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,8 @@ import java.util.List;
 @Service
 public class NewsDocumentServiceImpl implements NewsDocumentService {
     @Autowired
+    private NewsSearchDao dao;
+    @Autowired
     private NewsDocumentDao documentDao;
     @Autowired
     private ElasticsearchRestTemplate restTemplate;
@@ -41,26 +47,31 @@ public class NewsDocumentServiceImpl implements NewsDocumentService {
 
     @Override
     public R queryPage(String msg, int p, int s) {
-        //创建模糊查询对象
-        WildcardQueryBuilder wildcardQuery = QueryBuilders.wildcardQuery("name", "*" + msg + "*");
-        //实例化本地化查询构造器
-        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        queryBuilder.withQuery(wildcardQuery);
-        NativeSearchQuery query = queryBuilder.build();
-        //设置分页和排序
-        PageRequest pageRequest = PageRequest.of(p, s, Sort.by(Sort.Order.desc("id")));
-        query.setPageable(pageRequest);
-        //发送查询 并获取查询结果
-        SearchHits<NewsDocument> searchHits = restTemplate.search(query, NewsDocument.class, IndexCoordinates.of("car-es-index"));
-        //遍历获取查结果
-        List<NewsDocument> list = new ArrayList<>();
-        List<SearchHit<NewsDocument>> searchHitList = searchHits.getSearchHits();
-        for (int i = 0; i < searchHitList.size(); i++) {
-            list.add(searchHitList.get(i).getContent());
+        try {
+            //创建模糊查询对象
+            WildcardQueryBuilder wildcardQuery = QueryBuilders.wildcardQuery("name", "*" + msg + "*");
+            //实例化本地化查询构造器
+            NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+            queryBuilder.withQuery(wildcardQuery);
+            NativeSearchQuery query = queryBuilder.build();
+            //设置分页和排序
+            PageRequest pageRequest = PageRequest.of(p, s, Sort.by(Sort.Order.desc("id")));
+            query.setPageable(pageRequest);
+            //发送查询 并获取查询结果
+            SearchHits<NewsDocument> searchHits = restTemplate.search(query, NewsDocument.class, IndexCoordinates.of("car-es-index"));
+            //遍历获取查结果
+            List<NewsDocument> list = new ArrayList<>();
+            List<SearchHit<NewsDocument>> searchHitList = searchHits.getSearchHits();
+            for (int i = 0; i < searchHitList.size(); i++) {
+                list.add(searchHitList.get(i).getContent());
+            }
+            //return LayuiPage.createPageInfo(list, searchHits.getTotalHits());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        //return LayuiPage.createPageInfo(list, searchHits.getTotalHits());
-
-        return R.ok(list);
+        /*分页*/
+        PageHelper.startPage(1, 2);
+        return R.ok(new PageInfo<>(dao.searchByKeywords(msg)));
     }
 
     @Override

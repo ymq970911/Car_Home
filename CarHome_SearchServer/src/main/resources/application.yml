@@ -7,6 +7,12 @@ spring:
     nacos:
       discovery:
         server-addr: 47.94.193.104:8848  #注册中心地
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.94.193.104:3306/db_carhome?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
   elasticsearch:
     rest:
       uris: 39.100.255.221:9200
@@ -16,3 +22,6 @@ spring:
     username: guest
     password: guest
     virtual-host: /
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml

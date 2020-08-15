@@ -14,8 +14,11 @@ import java.util.List;
 public interface NewsDocumentService {
     //批量新增
     R saveBatch(List<NewsDocument> list);
+
     //搜索
     R queryPage(String msg, int p, int s);
+
     R all();
+
     R delAll();
 }

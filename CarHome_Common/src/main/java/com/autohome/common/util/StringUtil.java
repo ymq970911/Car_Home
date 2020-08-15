@@ -13,11 +13,11 @@ public class StringUtil {
      * @param strs 待校验的内容
      * @return 非空：true 有空：false
      */
-    public static boolean isnoEmpty(String... strs){
-        boolean r=true;
-        for(String s:strs){
-            if(s==null || s.length()==0){
-                r=false;
+    public static boolean isnoEmpty(String... strs) {
+        boolean r = true;
+        for (String s : strs) {
+            if (s == null || s.length() == 0) {
+                r = false;
                 break;
             }
         }

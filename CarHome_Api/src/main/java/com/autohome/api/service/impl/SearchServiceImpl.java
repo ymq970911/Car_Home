@@ -22,6 +22,6 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public R queryPage(String msg, int page, int limit) {
-        return restTemplate.getForObject("http://search/server/search.do?msg=" + msg + "&page=" + page + "&limit=" + limit, R.class);
+        return restTemplate.getForObject("http://searchserver/search/news/essearch.do?msg=" + msg + "&page=" + page + "&limit=" + limit, R.class);
     }
 }

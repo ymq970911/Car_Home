@@ -1,5 +1,6 @@
 package com.autohome.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -7,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @ApiModel(value = "com-autohome-entity-CarConfig")
 @Data
@@ -75,6 +77,8 @@ public class CarConfig implements Serializable {
      * 上市时间（年.月）
      */
     @ApiModelProperty(value = "上市时间（年.月）")
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ttm;
 
     /**

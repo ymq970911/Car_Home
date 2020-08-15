@@ -1,8 +1,6 @@
 package com.autohome.server.service;
 
-import com.autohome.common.dto.BrandLevDto;
-import com.autohome.common.dto.GetCarByBrandIdDto;
-import com.autohome.common.dto.GetCarDto;
+import com.autohome.common.dto.*;
 import com.autohome.common.vo.R;
 
 import java.util.List;
@@ -15,7 +13,7 @@ public interface BrandLeveService {
     /**
      * @return BrandLevDto
      */
-    R getAllBrandLevel();
+    R getAllBrandLevDto();
 
     /**
      * @param bid
@@ -27,7 +25,7 @@ public interface BrandLeveService {
      * @param bid
      * @return BrandLevDto
      */
-    R  getBrandById(Integer bid);
+    R  GetBrandById(Integer bid);
 
     /**
      * @param type
@@ -36,5 +34,30 @@ public interface BrandLeveService {
      * @return GetCarDto
      */
     R getBrandIdAndModelLevelAndType(Integer type, String model_level,Integer bid);
+
+
+    /**
+     * @param type
+     * @param model_level
+     * @param bid
+     * @return
+     * 排行榜
+     */
+    R leaderboard(Integer bid);
+
+   R getCarAttention();
+
+    /**
+     * @param updateOrAddCarAttention
+     * @return
+     * 添加某车的关注度
+     */
+    R updateCarAttention(UpdateOrAddCarAttention updateOrAddCarAttention);
+
+    /**
+     * @param id
+     * @return
+     */
+    R getCarAttentionById(Integer id);
 
 }

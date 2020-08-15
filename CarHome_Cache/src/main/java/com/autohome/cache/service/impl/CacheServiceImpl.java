@@ -68,8 +68,10 @@ public class CacheServiceImpl implements CacheService {
             if (expireTimeSeconds <= 0) {
                 expireTimeSeconds = -1;
             }
+            log.info(key+values.toString());
             template.opsForSet().add(key, values);
             template.opsForSet().getOperations().expire(key, expireTimeSeconds, TimeUnit.SECONDS);
+            log.info("true");
             return true;
         } catch (Exception e) {
             log.error("存储异常");
@@ -80,11 +82,12 @@ public class CacheServiceImpl implements CacheService {
     @Override
     public boolean saveScoreSet2Redis(String key, long expireTimeSeconds, double score, String value) throws CacheException {
         try {
-            if (expireTimeSeconds <= 0) {
-                expireTimeSeconds = -1;
-            }
+            // 放进有序集合里
             template.opsForZSet().add(key, value, score);
-            template.opsForSet().getOperations().expire(key, expireTimeSeconds, TimeUnit.SECONDS);
+            if (expireTimeSeconds > 0) {
+                //设置过期时间
+                template.opsForSet().getOperations().expire(key, expireTimeSeconds, TimeUnit.SECONDS);
+            }
             return true;
         } catch (Exception e) {
             log.error("存储异常");
@@ -247,7 +250,7 @@ public class CacheServiceImpl implements CacheService {
      */
     @Override
     public Map<String, Double> getScoreSetFromRedis(String key, int flag) {
-        Map<String, Double> map = new HashMap<>();
+        Map<String, Double> map = new TreeMap<>();
         Set<Object> objects = null;
         if (flag != 0) {
             // 降序
@@ -262,6 +265,7 @@ public class CacheServiceImpl implements CacheService {
                 map.put((String) o, template.opsForZSet().score(key, o));
             }
         }
+        System.out.println(map+"--------------");
         return map;
     }
 
@@ -338,5 +342,10 @@ public class CacheServiceImpl implements CacheService {
     public boolean unlock(String key) {
         redissonUtil.unlock(key);
         return true;
+    }
+
+    @Override
+    public Set<Object> getReverseRangeFromRedis(String key, long start, long end) {
+        return  template.opsForZSet().reverseRange(key, start, end);
     }
 }

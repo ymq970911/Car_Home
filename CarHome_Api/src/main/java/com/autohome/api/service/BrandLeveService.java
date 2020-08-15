@@ -13,4 +13,6 @@ public interface BrandLeveService {
     R getBrandIdAndModelLevelAndType(Integer type, String model_level, Integer bid);
 
     R getCarByBrandId(Integer bid);
+
+    R leaderboard(Integer bid);
 }

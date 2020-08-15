@@ -1,9 +1,7 @@
 package com.autohome.server.dao;
 
-import com.autohome.common.dto.BrandLevDto;
+import com.autohome.common.dto.*;
 
-import com.autohome.common.dto.GetCarByBrandIdDto;
-import com.autohome.common.dto.GetCarDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,4 +39,18 @@ public interface BrandLevelDao {
      */
     List<GetCarDto> getBrandIdAndModelLevelAndType(Integer type, String model_level, Integer bid);
 
+    List<CarDto> getCarAttention();
+
+    /**
+     * @param updateOrAddCarAttention
+     * @return
+     * 添加某车的关注度
+     */
+    int updateCarAttention(UpdateOrAddCarAttention updateOrAddCarAttention);
+
+    /**
+     * @param id
+     * @return
+     */
+    UpdateOrAddCarAttention getCarAttentionById(Integer id);
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Author: Jerry(姜源)
  * @Create: 2020/08/10 21:18
  */
-@Api(tags = "搜索模块接口-ES")
+@Api(tags = "搜索模块接口")
 @RestController
 @RequestMapping("/api/search")
 public class SearchController {
@@ -23,7 +23,7 @@ public class SearchController {
     @Autowired
     private SearchService service;
 
-    @ApiOperation(value = "获取所有新闻信息", notes = "默认按照分页获取所有新闻信息")
+    @ApiOperation(value = "查询新闻信息", notes = "根据关键词查询新闻信息")
     @GetMapping("/getall.do")
     public R getAll(String msg, int page, int limit) {
         return service.queryPage(msg, page, limit);

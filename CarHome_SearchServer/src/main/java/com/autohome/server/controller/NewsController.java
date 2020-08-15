@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "搜索模块接口 - ES")
 @RestController
-//@CrossOrigin
 @RequestMapping("/search/news")
 public class NewsController {
     @Autowired
@@ -27,22 +26,22 @@ public class NewsController {
 
     @PostMapping("/upload.do")
     public R upload(@RequestBody NewsDetailsDto dto) {
-        return R.ok(service.importData(dto));
+        return service.importData(dto);
     }
 
     @GetMapping("/essearch.do")
     public R page(String msg, int page, int limit) {
-        return R.ok(documentService.queryPage(msg, page, limit));
+        return documentService.queryPage(msg, page, limit);
     }
 
     @GetMapping("/all.do")
     public R all() {
-        return R.ok(documentService.all());
+        return documentService.all();
     }
 
     @DeleteMapping("/delall.do")
     public R delAll() {
-        return R.ok(documentService.delAll());
+        return documentService.delAll();
     }
 
 }

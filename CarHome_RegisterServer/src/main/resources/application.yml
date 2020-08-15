@@ -16,3 +16,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
+
+carhome:
+  user:
+    aeskey: 4PYuvnRVDaKE7E1feqq0FQ==

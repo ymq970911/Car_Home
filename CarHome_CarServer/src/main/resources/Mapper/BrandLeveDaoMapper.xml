@@ -12,7 +12,7 @@
             <result column="car_image" property="url"/>
             <result column="img_id" property="img_id"/>
             <result column="model_level" property="model_level"/>
-            <result column="car_type" property="car_type"/>
+            <result column="car_type" property="type"/>
             <result column="attention" property="attention"/>
         </collection>
     </resultMap>
@@ -28,21 +28,21 @@
                cg.url         AS car_image,
                cg.img_id
         FROM brand_level AS bl
-                 LEFT JOIN image AS i1 ON bl.img_id = i1.iid
-                 LEFT JOIN (
-            SELECT c.id,
-                   i.type as img_type,
-                   c.bid,
-                   c.car_name,
-                   c.attention,
-                   c.car_price,
-                   c.model_level,
-                   c.type as car_type,
-                   c.img_id,
-                   i.url
-            FROM car_general AS c
-                     LEFT JOIN image AS i ON i.iid = c.img_id
-        ) AS cg ON bl.bid = cg.bid
+                     LEFT JOIN image AS i1 ON bl.img_id = i1.iid
+                     LEFT JOIN (
+                SELECT c.id,
+                       i.type as img_type,
+                       c.bid,
+                       c.car_name,
+                       c.attention,
+                       c.car_price,
+                       c.model_level,
+                       c.type as car_type,
+                       c.img_id,
+                       i.url
+                FROM car_general AS c
+                             LEFT JOIN image AS i ON i.iid = c.img_id
+                ) AS cg ON bl.bid = cg.bid
         where bl.bid = 1
           and cg.img_type = 2
     </sql>
@@ -53,11 +53,6 @@
         WHERE b.img_id = i.iid
           and i.type = 6
     </sql>
-    <update id="updateCarAttention">
-        update car_general
-        set attention=(#{attention} + 1)
-        where id = #{id};
-    </update>
 
     <select id="getAllBrandLevDto" resultType="com.autohome.common.dto.BrandLevDto">
         <include refid="b"/>
@@ -97,16 +92,9 @@
                c.img_id,
                c.type as car_type
         from car_general c
-                 left join image i on c.img_id = i.iid
+                     left join image i on c.img_id = i.iid
         where i.type = 2
           and c.type = 1
         order by c.attention desc;
     </select>
-    <select id="getCarAttentionById" resultType="com.autohome.common.dto.UpdateOrAddCarAttention">
-        select attention
-        from car_general
-        where id = #{id}
-    </select>
-
-
 </mapper>

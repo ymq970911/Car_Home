@@ -35,6 +35,16 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public R getStrFromRedis(String key) {
-        return restTemplate.getForObject("http://cacheserver/cache/api/getstr.do", R.class);
+        return restTemplate.getForObject("http://cacheserver/cache/api/getstr.do?key=" + key, R.class);
+    }
+
+    @Override
+    public R delkeyFromRedis(String key) {
+        return restTemplate.getForObject("http://cacheserver/cache/api/delkeys?key=" + key, R.class);
+    }
+
+    @Override
+    public R checkKeyFromRedis(String key) {
+        return restTemplate.getForObject("http://cacheserver/cache/api/checkkey.do?key=" + key, R.class);
     }
 }

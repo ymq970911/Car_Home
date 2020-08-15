@@ -59,7 +59,7 @@ public interface CacheService {
 
     Set<Object> getSetFromRedis(String key);
 
-    Map<String, Double> getScoreSetFromRedis(String key, int flag);
+    Set<Object> getScoreSetFromRedis(String key, int flag);
 
     String getHashFromRedis(String key, String field);
 
@@ -83,6 +83,4 @@ public interface CacheService {
     boolean lock(String key, long timeseconds);
 
     boolean unlock(String key);
-
-    Set<Object> getReverseRangeFromRedis(String key, long start, long end);
 }

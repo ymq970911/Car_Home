@@ -16,6 +16,10 @@ import java.util.Properties;
  * @create: 2018-07-15 11:23
  */
 public class MailUtil {
+    // 邮箱地址
+    private static final String emailAddr = "xxx@qq.com";
+    // 邮箱授权码
+    private static final String authCode = "xxx";
 
     /**
      * 外网邮件发送
@@ -24,7 +28,6 @@ public class MailUtil {
      * @param code 传入的验证码
      */
     public static void sendMail(String to, String code) {
-        String myEmail = "471553857@qq.com";
         // Session对象:
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.qq.com"); // 设置主机地址
@@ -40,7 +43,7 @@ public class MailUtil {
         // 设置发件人：
         try {
             // 4.设置消息的发送者
-            Address fromAddr = new InternetAddress(myEmail);
+            Address fromAddr = new InternetAddress(emailAddr);
             message.setFrom(fromAddr);
 
             // 5.设置消息的接收者 nkpxcloxbtpxdjai
@@ -49,7 +52,7 @@ public class MailUtil {
             message.setRecipient(MimeMessage.RecipientType.TO, toAddr);
 
             // 6.设置邮件标题
-            message.setSubject("来自 " + myEmail + " 的安全验证码");
+            message.setSubject("来自 " + emailAddr + " 的安全验证码");
             // 7.设置正文
             message.setContent("这里是邮件的正文信息\n\n您的验证码为：" + code, "text/html;charset=UTF-8");
 
@@ -57,7 +60,7 @@ public class MailUtil {
             Transport transport = session.getTransport("smtp");
             // 9.设置火箭的发射目标（第三个参数就是你的邮箱授权码）
             //transport.connect("smtp.163.com", "发送者@163.com", "abcdefghabcdefgh");
-            transport.connect("smtp.qq.com", myEmail, "idkgwlanbspzbigi");
+            transport.connect("smtp.qq.com", emailAddr, authCode);
             // 10.发送
             transport.sendMessage(message, message.getAllRecipients());
 

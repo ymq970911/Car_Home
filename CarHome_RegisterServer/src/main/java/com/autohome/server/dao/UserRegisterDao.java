@@ -1,5 +1,6 @@
 package com.autohome.server.dao;
 
+import com.autohome.common.dto.UserDto;
 import com.autohome.common.dto.UserLoginDto;
 import com.autohome.entity.User;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ public interface UserRegisterDao {
 
     List<String> selectAll();
 
-//    void changePsw(int uid,String pws);
+    int insert(User dto);
 
+    User selectUserByPhone(String phone);
 }

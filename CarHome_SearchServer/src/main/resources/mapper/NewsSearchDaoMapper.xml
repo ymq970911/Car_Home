@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autohome.server.dao.NewsSearchDao">
+    <select id="searchByKeywords" resultType="com.autohome.common.dto.NewsDetailsDto">
+        select nd.*
+        from news_details as nd
+        where nd.title like concat('%', #{keywrods}, '%')
+           or nd.content like concat('%', #{keywrods}, '%')
+    </select>
+</mapper>

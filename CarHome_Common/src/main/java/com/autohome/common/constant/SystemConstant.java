@@ -12,12 +12,14 @@ public class SystemConstant {
     public static final int OSSTYPE_VEDIO = 2;
     public static final int OSSTYPE_JSON = 3;
 
-
     //mail
-    public static final String REGISTER_CODE="mail:";
+    public static final String REGISTER_CODE="register:";
     public static final String USERLOGIN_TOKEN="user:";
-    public static final String TOKEN_USER="voter:token:";
-    //后面追加手机号 值存储用户信息
+    public static final String TOKEN_USER="user:token:";
+
+    //car
+    public static final String CAR_LIST_KEY="car:hot:zset";
+
     //有效期
     public static final long TOKENMAIL_TIME=60*5L;//令牌有效期 单位秒
     public static final long TOKEN_TIME=60*30;//令牌有效期 单位秒

@@ -1,5 +1,6 @@
 package com.autohome.server.service;
 
+import com.autohome.common.dto.UserDto;
 import com.autohome.common.vo.R;
 import com.autohome.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -14,4 +15,9 @@ public interface UserRegisterService {
 
     R createUserPhone(String code,String phone);
 
+    R checkCode(String to, String code);
+
+    R regUser(UserDto dto);
+
+    R checkPhone(String phone);
 }

@@ -1,10 +1,12 @@
 package com.autohome.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @ApiModel(value = "com-autohome-entity-Posts")
 @Data
@@ -37,6 +39,8 @@ public class Posts implements Serializable {
      * 发表时间
      */
     @ApiModelProperty(value = "发表时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date post_time;
 
     /**

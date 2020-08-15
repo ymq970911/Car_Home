@@ -10,4 +10,7 @@ public interface RedisService {
     //@GetMapping("/cache/api/getstr.do")
     R getStrFromRedis(String key);
 
+    R delkeyFromRedis(String key);
+
+    R checkKeyFromRedis(String key);
 }

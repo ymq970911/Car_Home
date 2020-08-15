@@ -9,8 +9,8 @@ import java.util.List;
  * @author YMQ
  */
 @Repository
-    public interface MainLevelDao {
-    
+public interface MainLevelDao {
+
     List<MainLevel> getAllMainLevel();
 
     int addMainLevel(String name);

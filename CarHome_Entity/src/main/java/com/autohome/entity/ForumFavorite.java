@@ -8,15 +8,9 @@ import lombok.Data;
 @ApiModel(value = "com-autohome-entity-ForumFavorite")
 @Data
 public class ForumFavorite implements Serializable {
-    /**
-     *
-     */
     @ApiModelProperty(value = "")
     private Integer favorite_id;
 
-    /**
-     * 关注论坛名字
-     */
     @ApiModelProperty(value = "关注论坛名字")
     private String favorite_name;
 

@@ -62,7 +62,7 @@
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
         </dependency>
-<!--添加redis依赖-->
+        <!--添加redis依赖-->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>

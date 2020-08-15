@@ -3,6 +3,7 @@ package com.autohome.api.controller;
 import com.autohome.common.vo.R;
 import com.autohome.api.service.MainLeveService;
 import com.autohome.entity.MainLevel;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author YMQ
  */
+@Api(tags = "作废")
 @RestController
 @RequestMapping("/carserver/mainlevecontroller/")
 public class MainLeveController {

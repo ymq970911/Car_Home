@@ -12,7 +12,7 @@
     <artifactId>CarHome_Common</artifactId>
     <!--声明的版本号-->
     <properties>
-        <fastjson.version>1.2.68</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <jedis.version>3.3.0</jedis.version>
     </properties>
     <!--	版本限定 约定jar只能使用声明的版本号-->
